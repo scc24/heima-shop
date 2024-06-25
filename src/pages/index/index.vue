@@ -6,6 +6,7 @@
 <template>
   <view class="index">
     <CustomNavbar></CustomNavbar>
+    <XtxSwiper></XtxSwiper>
   </view>
 </template>
 
