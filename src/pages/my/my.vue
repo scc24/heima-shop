@@ -7,7 +7,7 @@ const getData = async () => {
   const res = await http<string[]>({
     url: '/home/banner',
     method: 'GET',
-    header: {}
+    header: {},
   })
   console.log(res.result)
 }
@@ -29,6 +29,4 @@ const getData = async () => {
   </view>
 </template>
 
-<style lang="scss">
-//
-</style>
+<style lang="scss"></style>

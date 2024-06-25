@@ -22,7 +22,6 @@ const httpInterceptor = {
     if (token) {
       options.header.Authorization = token
     }
-    console.log(options)
   },
 }
 
@@ -43,8 +42,26 @@ export const http = <T>(options: UniApp.RequestOptions) => {
         if (res.statusCode > 200 && res.statusCode < 300) {
           resolve(res.data as Data<T>)
         } else if (res.statusCode === 401) {
-          console.log('aaa')
+          const memberStore = useMemberStore()
+          memberStore.clearProfile()
+          uni.navigateTo({ url: '/pages/login/login' })
+          reject(res)
+        } else {
+          uni.showToast({
+            title: (res.data as Data<T>).msg || '请求错误',
+            icon: 'none',
+            mask: true,
+          })
+          reject(res)
         }
+      },
+      fail(err) {
+        uni.showToast({
+          title: '网络错误，换个网络试试',
+          icon: 'none',
+          mask: true,
+        })
+        reject(err)
       },
     })
   })
